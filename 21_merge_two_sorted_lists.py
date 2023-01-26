@@ -28,19 +28,12 @@ class Solution:
         
         """
         # Recursive
-        if list1 and list2:
-            if list1.val <= list2.val:
-                next1 = list1.next
-                next2 = list2.next
-                if next1 and next1.val >= list2.val or not next1:
-                    list1.next = ListNode(val=list2.val, next=next1)
-                else:
-                    next2 = list2
-                self.mergeTwoLists(next1, next2)
-            else:
-                list1 = self.mergeTwoLists(list2, list1)
+        if not (list1 and list2):
+            return list1 or list2
+        
+        if list1.val <= list2.val:
+            list1.next = self.mergeTwoLists(list1.next, list2)
         else:
-            if list2:
-                return list2
+            list1 = self.mergeTwoLists(ListNode(list2.val, list1), list2.next)
         return list1
         """
